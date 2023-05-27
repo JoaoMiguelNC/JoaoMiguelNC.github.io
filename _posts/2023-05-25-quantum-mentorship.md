@@ -5,7 +5,8 @@ layout: post
 categories: media
 ---
 
-Given a cost function \(L(U)\)
+Given a cost function $${\cal L}(U)$$
 
 The evolution is
-$$\dot{U} = U - \mathrm{L}$$
+
+$$\dot{U} = U - {\cal L}(U)$$
