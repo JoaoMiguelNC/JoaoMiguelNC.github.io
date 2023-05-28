@@ -27,7 +27,7 @@ $$\dot{U} = - \epsilon\mathrm{grad}{\cal L}(U)$$
 
 Which leads to
 
-$$U_{k+1} = \exp(- \epsilon\mathrm{grad}{\cal L}(U))$$
+$$U_{k+1} = \exp(- \epsilon\mathrm{grad}{\cal L}(U_k))$$
 
 PUT IMAGE HERE
 
