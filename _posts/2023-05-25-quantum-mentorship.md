@@ -13,9 +13,23 @@ Given a cost function $${\cal L}(\theta)$$
 
 We can use gradiant descent to minimize the cost function:
 
+$$\dot{\theta} = - \epsilon\nabla_\theta{\cal L}(\theta)$$
+
+And we get
+
 $$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla_\theta{\cal L}(\theta)$$
 
 In [1] the authors propose doing the optimization over the matrix $$U$$ instead of the parameter space.
+
+Now the cost is a function of $$U$$ and we have
+
+$$\dot{U} = - \epsilon\mathrm{grad}{\cal L}(U)$$
+
+Which leads to
+
+$$U_{k+1} = \exp(- \epsilon\mathrm{grad}{\cal L}(U))$$
+
+PUT IMAGE HERE
 
 # Special Unitary Differential Manifold
 The special unitary Lie group is the set of $$n\times n$$ unitary matrices with determinant 1, that is
