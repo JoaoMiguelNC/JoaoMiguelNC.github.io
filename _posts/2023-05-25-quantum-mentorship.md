@@ -24,7 +24,7 @@ $$\mathrm{SU}(n)=\{X\in\mathbb{C}^{n\times n}\!: X^\dagger X=I, \det(X)=1\}$$
 
 $$\mathrm{SU}(n)$$ is a differential manifold and given $$U\in\mathrm{SU}(n)$$ the tangent space at $$U$$ is
 
-$$T_U\mathrm{SU}(n)=\{V\in\mathbb{C}^{n\times n}\!: V^\dagger U + U^\dagger U = 0 \ \wedge \ \mathrm{tr}(U^\dagger V)=0\}$$
+$$T_U\mathrm{SU}(n)=\{V\in\mathbb{C}^{n\times n}\!: V^\dagger U + U^\dagger V = 0 \ \wedge \ \mathrm{tr}(U^\dagger V)=0\}$$
 
 Thus, the corresponding Lie algebra, $$\mathfrak{su}(n)$$, is the tangent space at the identity
 
