@@ -21,13 +21,13 @@ $$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla_\theta{\cal L}(\theta)$$
 
 In [1] the authors propose doing the optimization over the matrix $$U$$ instead of the parameter space.
 
-Now the cost is a function of $$U$$ and we have
+Now the cost is a function of $$U$$ and we have (meter qualquer coisa que o grad(L) é da forma f(U)U e que por isso vamos usar grad para nos referirmos a f(U)U e a f(U) e que pelo contexto fica claro, neste caso estamos a usar a segunda)
 
-$$\dot{U} = - \epsilon\mathrm{grad}{\cal L}(U)$$
+$$\dot{U} = - \epsilon\cdot\mathrm{grad}{\cal L}(U)\cdot U$$
 
 Which leads to
 
-$$U_{k+1} = \exp(- \epsilon\mathrm{grad}{\cal L}(U_k))$$
+$$U_{k+1} = \exp(- \epsilon\cdot\mathrm{grad}{\cal L}(U_k))$$
 
 PUT IMAGE HERE
 
@@ -44,5 +44,34 @@ Thus, the corresponding Lie algebra, $$\mathfrak{su}(n)$$, is the tangent space 
 
 $$\mathfrak{su}(n)=\{\Omega\in\mathbb{C}^{n\times n}\!: \Omega^\dagger=-\Omega \ \wedge \ \mathrm{tr}\,\Omega=0\}$$
 
+# Computing the Gradient
+
+## Cost Function 1
+
+In [1] they compute the gradient for the cost function 
+
+$${\cal L}(U) = \mathrm{tr}(HU\rho_oU^\dagger)$$
+
+Obtaining 
+
+$$\mathrm{grad}{\cal L}(U) = - [U\rho_0U^\dagger, H]U$$
+
+For simplicity we'll call $$\mathrm{grad}{\cal L}(U)$$ to the part $$- [U\rho_0U^\dagger, H]$$ so that it fits nicelly in the equation
+
+$$\dot{U} = - \epsilon\cdot\mathrm{grad}{\cal L}(U)\cdot U$$
+
+## Cost Function 2
+
+We computed the gradient for the cost function used in [2]
+
+$${\cal L}(U) = 1 - \frac{1}{4^n}|\mathrm{tr}(V^\dagger U)|^2$$
+
+And we got
+
+$$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger)U$$
+
 # References
+
 [1] Roeland Wiersema and Nathan Killoran. Optimizing quantum circuits with riemannian gradient flow, 2022.
+
+[2] Sumeet Khatri, Ryan LaRose, Alexander Poremba, Lukasz Cincio, Andrew T. Sornborger, and Patrick J. Coles. Quantum-assisted quantum compiling. 2018.
