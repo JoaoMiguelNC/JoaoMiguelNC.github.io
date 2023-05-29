@@ -68,7 +68,11 @@ $${\cal L}(U) = 1 - \frac{1}{4^n}|\mathrm{tr}(V^\dagger U)|^2$$
 
 And we got
 
-$$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger)U$$
+$$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
+
+## Cost Function 3
+
+...
 
 # References
 
