@@ -29,7 +29,7 @@ $$\dot{\theta} = - \epsilon\nabla{\cal L}(\theta)$$
 
 And we have a recursive method of calculating the next iteration of $$\theta$$
 
-$$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla{\cal L}(\theta)$$
+$$\theta_{k+1} = \theta_k - \epsilon\nabla{\cal L}(\theta)$$
 
 # Riemann Gradient Flow
 
