@@ -7,9 +7,7 @@ categories: media
 # Intro
 A variational quantum algorithm uses a classical approach to optimize the parameters $$\theta$$ of the circuit.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png" />
-</p>
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png" /></div>
 
 ![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
