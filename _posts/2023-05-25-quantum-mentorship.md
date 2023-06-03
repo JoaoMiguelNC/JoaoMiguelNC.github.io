@@ -19,17 +19,17 @@ For QOSF Quantum Computing Mentorship Program we expanded on the previous mentio
 
 # Variational Quantum Algorithm
 
-A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a value $$U|0\rangle$$. For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta)$$ (or its gradient $$\nabla_\theta{\cal L}(\theta)$$) calculated using a quantum computer$$. 
+A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a value $$U|0\rangle$$. For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta)$$ (or its gradient $$\nabla{\cal L}(\theta)$$) calculated using a quantum computer$$. 
 
 ![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
 For the optimization we are interested in the gradient descent. Thus we can minimize the cost function considering the flow
 
-$$\dot{\theta} = - \epsilon\nabla_\theta{\cal L}(\theta)$$
+$$\dot{\theta} = - \epsilon\nabla{\cal L}(\theta)$$
 
 And we have a recursive method of calculating the next iteration of $$\theta$$
 
-$$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla_\theta{\cal L}(\theta)$$
+$$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla{\cal L}(\theta)$$
 
 # Riemann Gradient Flow
 
