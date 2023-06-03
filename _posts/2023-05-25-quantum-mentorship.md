@@ -8,11 +8,10 @@ categories: media
 A variational quantum algorithm uses a classical approach to optimize the parameters $$\theta$$ of the circuit.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/temporary%20circuit.png" />
+  <img src="https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png" />
 </p>
 
-
-![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/temporary%20circuit.png)
+![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
 Given a cost function $${\cal L}(\theta)$$
 
