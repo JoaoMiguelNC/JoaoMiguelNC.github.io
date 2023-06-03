@@ -72,7 +72,9 @@ $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dag
 
 ## Cost Function 3
 
-To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that $$U|0\rangle$$ approximates $$|x\rangle$$ using the cost function
+To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
+$$U|0\rangle$$
+approximates $$|x\rangle$$ using the cost function
 
 $${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
 
