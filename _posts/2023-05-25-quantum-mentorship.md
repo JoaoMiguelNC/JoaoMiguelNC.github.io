@@ -1,5 +1,5 @@
 ---
-title:  "Advanced examples"
+title:  "QOSF Quantum Computing Mentorship Program"
 mathjax: true
 layout: post
 categories: media
@@ -39,7 +39,7 @@ In [1] the authors propose doing the optimization over the matrix $$U$$ instead 
 
 Now the cost is a function of $$U$$ and we have (meter qualquer coisa que o grad(L) é da forma f(U)U e que por isso vamos usar grad para nos referirmos a f(U)U e a f(U) e que pelo contexto fica claro, neste caso estamos a usar a segunda)
 
-$$\dot{U} = - \cdot\mathrm{grad}{\cal L}(U)\cdot U$$
+$$\dot{U} = - \mathrm{grad}{\cal L}(U)\cdot U$$
 
 Which leads to
 
