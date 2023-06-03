@@ -10,7 +10,7 @@ Quantum supremacy is the goal that a quantum computer can solve a problem that n
 
 There are, however, areas where simple quantum algorithms are being used, for example, quantum key distribution. But for anything complex, classical computers are still our go to. This forms the basis of Noisy Intermediate Scale Quantum (NISQ) computing - using quantum computers where they can be used and then outsource difficult calculations to a classical computer.   
 
-Variational Quantum Algorithms (VQA) is a type of Noisy Intermediate Scale Quantum (NISQ) computing. The objective of a VQA is to approximate some value using a parameterized quantum circuit by using a quantum circuit to compute quantum values and passing them on to a classical optimization algorithm.  
+Variational Quantum Algorithms (VQA) is a type of Noisy Intermediate Scale Quantum (NISQ) computing. The objective of a VQA is to approximate some value using a parameterized quantum circuit by using a quantum computer to calculate quantum values and passing them on to a classical optimization algorithm.  
 
 (meter aqui tb que o que fizemos foi pegar na ideia de optimizar no espaço das unitarias e calcular o gradiente de varias cost functions)
 
