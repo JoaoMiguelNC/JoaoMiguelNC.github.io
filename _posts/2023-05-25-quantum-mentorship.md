@@ -80,7 +80,10 @@ For this function the gradient is
 
 $$\mathrm{grad}{\cal L}(U) = \left[ U|0\rangle\langle 0|U^\dagger, \frac{fA^\dagger A - gA^\dagger|b\rangle\langle b|A}{g^2} \right]U$$
 
-where $$f:=\mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ and $$g:=U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
+where 
+$$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ 
+and 
+$$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
 
 ## Cost Function 4
 For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
