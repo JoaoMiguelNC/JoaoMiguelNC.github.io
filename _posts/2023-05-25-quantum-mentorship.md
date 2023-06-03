@@ -13,31 +13,25 @@ There are, however, areas where simple quantum algorithms are being used, for ex
 Variational Quantum Algorithms (VQA) is a type of Noisy Intermediate Scale Quantum (NISQ) computing. The objective of a VQA is to approximate some value using a parameterized quantum circuit by using a quantum computer to calculate quantum values and passing them on to a classical optimization algorithm to improve the parameters. 
 
 
-In [1] the authors take a different approach, instead of optimizing over the parameter space, they optimize directly over the special unitary group using Riemann gradient flow. They derived the Riemann gradient for the Variational Quantum Eigensolver and build circuits that could compute it.  
+In [1] the authors take a different approach, instead of optimizing over the parameter space, they optimize directly over the special unitary group using Riemann gradient flow. They derived the Riemann gradient for the Variational Quantum Eigensolver (VQE) and build circuits that could compute it.  
 
 For QOSF Quantum Computing Mentorship Program we expanded on the previous mentioned work and derived the gradient flow for other cost functions.
 
 # Variational Quantum Algorithm
 
+A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a value $$U|0\rangle$$. For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta) (or its gradient $$\nabla_\theta{\cal L}(\theta)$$) calculated using a quantum computer$$. 
+
 ![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
-It consistes of two repeating steps:
-
-1. Using a quantum circuit to compute a cost function $${\cal L}(\theta)$$ (or its gradient)
-2. Using a classical optimizer to update the value of $$\theta$$
-
-Here we will look at using gradient descent optimization.
-
-
-Given a cost function $${\cal L}(\theta)$$
-
-We can use gradiant descent to minimize the cost function:
+For the optimization we are interested in the gradient descent. Thus we can minimize the cost function considering the flow
 
 $$\dot{\theta} = - \epsilon\nabla_\theta{\cal L}(\theta)$$
 
-And we get
+And we have a recursive method of calculating the next iteration of $$\theta$$
 
 $$\dot{\theta}_{k+1} = \theta_k - \epsilon\nabla_\theta{\cal L}(\theta)$$
+
+# Riemann Gradient Flow
 
 In [1] the authors propose doing the optimization over the matrix $$U$$ instead of the parameter space.
 
