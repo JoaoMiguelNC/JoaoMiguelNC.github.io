@@ -72,7 +72,37 @@ $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dag
 
 ## Cost Function 3
 
-...
+To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that $$U|0\rangle$$ approximates $$|x\rangle$$ using the cost function
+
+$${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
+
+For this function the gradient is
+
+$$\mathrm{grad}{\cal L}(U) = \left[ U|0\rangle\langle 0|U^\dagger, \frac{fA^\dagger A - gA^\dagger|b\rangle\langle b|A}{g^2} \right]U$$
+
+where $$f:=\mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ and $$g:=U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
+
+## Cost Function 4
+For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
+
+$${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i \right)^2$$
+
+And the gradient is
+
+$$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
+
+## Cost Function 5
+For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
+
+$${\cal L}(U) = -\frac{1}{m}\sum_{i = 1}^m\left(y_i\log f(U; x_i) + (1 - y_i)\log(1 - f(U; x_i))\right)$$
+
+where $$f(U; x_i) := (\mathrm{tr}(OU\rho_0(x_i)U^\dagger) + 1)/2$$
+
+The gradient for this loss function is
+
+$$\mathrm{grad}{\cal L}(U) = \frac{1}{m}\left(\sum_i \frac{T_i + 1 - 2y_i}{T_i^2 - 1}[U\rho_0(x_i)U^\dagger, O] \right)U$$
+
+where $$T_i:=\mathrm{tr}(OU\rho_0(x_i)U^\dagger)$$
 
 # References
 
