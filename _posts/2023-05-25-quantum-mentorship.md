@@ -25,7 +25,7 @@ A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a 
 
 For the optimization we are interested in the gradient descent. Thus we can minimize the cost function considering the flow
 
-$$\dot{\theta} = - \epsilon\nabla{\cal L}(\theta)$$
+$$\dot{\theta} = - \nabla{\cal L}(\theta)$$
 
 And we have a recursive method of calculating the next iteration of $$\theta$$
 
@@ -37,7 +37,7 @@ In [1] the authors propose doing the optimization over the matrix $$U$$ instead 
 
 Now the cost is a function of $$U$$ and we have (meter qualquer coisa que o grad(L) é da forma f(U)U e que por isso vamos usar grad para nos referirmos a f(U)U e a f(U) e que pelo contexto fica claro, neste caso estamos a usar a segunda)
 
-$$\dot{U} = - \epsilon\cdot\mathrm{grad}{\cal L}(U)\cdot U$$
+$$\dot{U} = - \cdot\mathrm{grad}{\cal L}(U)\cdot U$$
 
 Which leads to
 
