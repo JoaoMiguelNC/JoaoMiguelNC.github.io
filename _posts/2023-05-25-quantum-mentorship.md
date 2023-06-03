@@ -21,7 +21,7 @@ For QOSF Quantum Computing Mentorship Program we expanded on the previous mentio
 
 A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a value 
 $$U|0\rangle$$. 
-For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta)$$ (or its gradient $$\nabla{\cal L}(\theta)$$) calculated using a quantum computer$$. 
+For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta)$$ (or its gradient $$\nabla{\cal L}(\theta)$$) calculated using a quantum computer. 
 
 ![variational circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
