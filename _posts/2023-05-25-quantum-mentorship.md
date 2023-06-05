@@ -19,7 +19,7 @@ For QOSF Quantum Computing Mentorship Program we expanded on the previous mentio
 
 # Variational Quantum Algorithm
 
-A VQA is used when we want to aproximate a quantum operator $$U$$ to extimate a value 
+A VQA is used when we want to aproximate a quantum operator $$U$$ to estimate a value 
 $$U|0\rangle$$. 
 For that we consider a parameterized quantum circuit $$U(\theta)$$ whose parrameter $$\theta$$ is optimized using a classical algorithm with a relevant cost function $${\cal L}(\theta)$$ (or its gradient $$\nabla{\cal L}(\theta)$$) calculated using a quantum computer. 
 
