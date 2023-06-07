@@ -37,7 +37,7 @@ $$\theta_{k+1} = \theta_k - \epsilon\nabla{\cal L}(\theta)$$
 
 In [1] the authors propose doing the optimization over the matrix $$U$$ instead of the parameter space.
 
-Now the cost is a function of $$U$$ and we have (meter qualquer coisa que o grad(L) é da forma f(U)U e que por isso vamos usar grad para nos referirmos a f(U)U e a f(U) e que pelo contexto fica claro, neste caso estamos a usar a segunda)
+Now the cost is a function of $$U$$ and it turns out that the gradient is of all the cost functions we considered are of the form $$f(U)U$$, for this reason we will use $$\mathrm{grad}{\cal L}$$ to refer to $$f(U)$$. With this in mind, we have
 
 $$\dot{U} = - \mathrm{grad}{\cal L}(U)\cdot U$$
 
@@ -45,7 +45,9 @@ Which leads to
 
 $$U_{k+1} = \exp(- \epsilon\cdot\mathrm{grad}{\cal L}(U_k))$$
 
-PUT IMAGE HERE
+Which means that to update the circuit for $$U$$, we just need to append the exponential as can been seen in the follwing figure taken from [1]
+
+![update circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
 
 # Special Unitary Differential Manifold
 The special unitary Lie group is the set of $$n\times n$$ unitary matrices with determinant 1, that is
