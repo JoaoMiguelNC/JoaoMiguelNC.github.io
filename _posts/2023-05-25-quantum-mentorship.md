@@ -39,7 +39,7 @@ In [1] the authors propose doing the optimization over the matrix $$U$$ instead 
 
 Now the cost is a function of $$U$$ and it turns out that the gradient can be written in the form $$f(U)U$$. With this in mind, we have
 
-$$\dot{U} = - f(U)U$$$
+$$\dot{U} = - f(U)U$$
 
 Which leads to
 
