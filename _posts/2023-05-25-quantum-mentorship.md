@@ -47,24 +47,11 @@ $$U_{k+1} = \exp(- \epsilon\cdot\mathrm{grad}{\cal L}(U_k))$$
 
 Which means that to update the circuit for $$U$$, we just need to append the exponential as can been seen in the follwing figure taken from [1]
 
-![update circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/U%20theta%20circuit.png)
-
-# Special Unitary Differential Manifold
-The special unitary Lie group is the set of $$n\times n$$ unitary matrices with determinant 1, that is
-
-$$\mathrm{SU}(n)=\{X\in\mathbb{C}^{n\times n}\!: X^\dagger X=I, \det(X)=1\}$$
-
-$$\mathrm{SU}(n)$$ is a differential manifold and given $$U\in\mathrm{SU}(n)$$ the tangent space at $$U$$ is
-
-$$T_U\mathrm{SU}(n)=\{V\in\mathbb{C}^{n\times n}\!: V^\dagger U + U^\dagger V = 0 \ \wedge \ \mathrm{tr}(U^\dagger V)=0\}$$
-
-Thus, the corresponding Lie algebra, $$\mathfrak{su}(n)$$, is the tangent space at the identity
-
-$$\mathfrak{su}(n)=\{\Omega\in\mathbb{C}^{n\times n}\!: \Omega^\dagger=-\Omega \ \wedge \ \mathrm{tr}\,\Omega=0\}$$
+![update circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Updating%20circuit.png)
 
 # Computing the Gradient
 
-## Cost Function 1
+## Variational Quantum Eigensolver
 
 In [1] they compute the gradient for the cost function 
 
@@ -88,7 +75,7 @@ And we got
 
 $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
 
-## Cost Function 3
+## Solving Linear Equations
 
 To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
 $$U|0\rangle$$
@@ -105,7 +92,7 @@ $$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$
 and 
 $$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
 
-## Cost Function 4
+## Mean Square Error
 For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
 
 $${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i \right)^2$$
@@ -114,7 +101,7 @@ And the gradient is
 
 $$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
 
-## Cost Function 5
+## Cross Entropy
 For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
 
 $${\cal L}(U) = -\frac{1}{m}\sum_{i = 1}^m\left(y_i\log f(U; x_i) + (1 - y_i)\log(1 - f(U; x_i))\right)$$
