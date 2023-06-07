@@ -43,7 +43,7 @@ $$\dot{U} = - f(U)U$$$
 
 Which leads to
 
-$$U_{k+1} = \exp(- \epsilon\f(U_k))U_k$$
+$$U_{k+1} = \exp(- \epsilon f(U_k))U_k$$
 
 Which means that to update the circuit for $$U$$, we just need to append the exponential as can been seen in the following figure taken from [1] where the authors are identifying the gradient with just the $$f(U)$$ part.
 
