@@ -51,6 +51,8 @@ Which means that to update the circuit for $$U$$, we just need to append the exp
 
 # Computing the Gradient
 
+For the mentorship program, we redirived the gradient in [1] and derived other gradiants based on different cost functions.
+
 ### Variational Quantum Eigensolver
 
 In [1] the authors compute the gradient for the cost function of the variational quantum eigensolver:
@@ -61,7 +63,7 @@ Obtaining
 
 $$\mathrm{grad}{\cal L}(U) = - [U\rho_0U^\dagger, H]U$$
 
-## Quantum-Assisted Quantum Compiling
+### Quantum-Assisted Quantum Compiling
 
 We computed the gradient for the cost function used in quantum-assisted quantum compiling (see [2])
 
@@ -71,7 +73,7 @@ And we got
 
 $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
 
-## Solving Linear Equations
+### Solving Linear Equations
 
 To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
 $$U|0\rangle$$
@@ -88,7 +90,7 @@ $$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$
 and 
 $$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
 
-## Mean Square Error
+### Mean Square Error
 For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
 
 $${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i \right)^2$$
@@ -97,7 +99,7 @@ And the gradient is
 
 $$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
 
-## Cross Entropy
+### Cross Entropy
 For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
 
 $${\cal L}(U) = -\frac{1}{m}\sum_{i = 1}^m\left(y_i\log f(U; x_i) + (1 - y_i)\log(1 - f(U; x_i))\right)$$
