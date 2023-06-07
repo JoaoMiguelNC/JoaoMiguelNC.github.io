@@ -37,15 +37,15 @@ $$\theta_{k+1} = \theta_k - \epsilon\nabla{\cal L}(\theta)$$
 
 In [1] the authors propose doing the optimization over the matrix $$U$$ instead of the parameter space.
 
-Now the cost is a function of $$U$$ and it turns out that the gradient is of all the cost functions we considered are of the form $$f(U)U$$, for this reason we will use $$\mathrm{grad}{\cal L}$$ to refer to $$f(U)$$. With this in mind, we have
+Now the cost is a function of $$U$$ and it turns out that the gradient can be written in the form $$f(U)U$$. With this in mind, we have
 
-$$\dot{U} = - \mathrm{grad}{\cal L}(U)\cdot U$$
+$$\dot{U} = - f(U)U$$$
 
 Which leads to
 
-$$U_{k+1} = \exp(- \epsilon\cdot\mathrm{grad}{\cal L}(U_k))$$
+$$U_{k+1} = \exp(- \epsilon\f(U_k))U_k$$
 
-Which means that to update the circuit for $$U$$, we just need to append the exponential as can been seen in the follwing figure taken from [1]
+Which means that to update the circuit for $$U$$, we just need to append the exponential as can been seen in the following figure taken from [1] where the authors are identifying the gradient with just the $$f(U)$$ part.
 
 ![update circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Updating%20circuit.png)
 
@@ -53,7 +53,7 @@ Which means that to update the circuit for $$U$$, we just need to append the exp
 
 ## Variational Quantum Eigensolver
 
-In [1] they compute the gradient for the cost function 
+In [1] the authors compute the gradient for the cost function of the variational quantum eigensolver:
 
 $${\cal L}(U) = \mathrm{tr}(HU\rho_oU^\dagger)$$
 
@@ -61,13 +61,9 @@ Obtaining
 
 $$\mathrm{grad}{\cal L}(U) = - [U\rho_0U^\dagger, H]U$$
 
-For simplicity we'll call $$\mathrm{grad}{\cal L}(U)$$ to the part $$- [U\rho_0U^\dagger, H]$$ so that it fits nicelly in the equation
+## Quantum-Assisted Quantum Compiling
 
-$$\dot{U} = - \epsilon\cdot\mathrm{grad}{\cal L}(U)\cdot U$$
-
-## Cost Function 2
-
-We computed the gradient for the cost function used in [2]
+We computed the gradient for the cost function used in quantum-assisted quantum compiling (see [2])
 
 $${\cal L}(U) = 1 - \frac{1}{4^n}|\mathrm{tr}(V^\dagger U)|^2$$
 
@@ -79,7 +75,7 @@ $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dag
 
 To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
 $$U|0\rangle$$
-approximates $$|x\rangle$$ using the cost function
+approximates $$|x\rangle$$ using one cost function introduced in [3]
 
 $${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
 
@@ -119,3 +115,5 @@ where $$T_i:=\mathrm{tr}(OU\rho_0(x_i)U^\dagger)$$
 [1] Roeland Wiersema and Nathan Killoran. Optimizing quantum circuits with riemannian gradient flow, 2022.
 
 [2] Sumeet Khatri, Ryan LaRose, Alexander Poremba, Lukasz Cincio, Andrew T. Sornborger, and Patrick J. Coles. Quantum-assisted quantum compiling. 2018.
+
+[3] Carlos Bravo-Prieto, Ryan LaRose, M. Cerezo, Yigit Subasi, Lukasz Cincio, and Patrick J. Coles. Variational quantum linear solver, 2019.
