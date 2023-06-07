@@ -49,7 +49,9 @@ Which means that to update the circuit for $$U$$, we just need to append the exp
 
 ![update circuit](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Updating%20circuit.png)
 
-## Variational Quantum Eigensolver
+# Computing the Gradient
+
+### Variational Quantum Eigensolver
 
 In [1] the authors compute the gradient for the cost function of the variational quantum eigensolver:
 
