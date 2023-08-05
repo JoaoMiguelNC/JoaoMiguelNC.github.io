@@ -141,6 +141,7 @@ and
 $$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
 
 #### Code and Graph
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -220,7 +221,7 @@ plt.ylabel('Cost ${\cal L}(U)$')
 
 For a linear system with size 8 the graph was:
 
-![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Solving%20Linear%20Equations.png)
+![Solving Linear Equations](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Solving%20Linear%20Equations.png)
 
 
 ### Mean Square Error
@@ -231,6 +232,80 @@ $${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagg
 And the gradient is
 
 $$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
+
+
+#### Code and Graph
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from random import gauss
+
+from scipy.stats import unitary_group
+from scipy.linalg import expm
+
+# Useful Functions
+
+def Ry(theta):
+  h_t = theta / 2 # half theta
+  return np.array([[np.cos(h_t), - np.sin(h_t)], [np.sin(h_t), np.cos(h_t)]])
+
+def dag(X):
+  return X.conj().T
+
+def rho(x_i):
+  x_range = 5 # ie -x_range <= x <= x_range
+  theta = (x_i + x_range) * np.pi / (2*x_range)
+  return Ry(theta) @ np.array([[1, 0],[0, 0]]) @ dag(Ry(theta))
+
+def commutator(A, B):
+  return A @ B - B @ A
+
+
+# Cost and Gradient Functions
+
+def cost(O, U, x, y):
+  m = len(x)
+  return sum([(np.trace(O @ U @ rho(x[i]) @ dag(U)) - y[i]) ** 2 for i in range(m)]) / (2*m)
+
+def grad(O, U, x, y):
+  m = len(x)
+
+  def tr(i):
+    return np.trace(O @ U @ rho(x[i]) @ dag(U)) - y[i]
+
+  def commut(i):
+    return commutator(U @ rho(x[i]) @ dag(U), O)
+
+  return sum([ tr(i) * commut(i) for i in range(m)])/ m
+
+# Initialization
+
+N = 20
+sig = .5
+x = [gauss(-2, sig) for _ in range(N)] + [gauss(2, sig) for _ in range(N)]
+y = [1 if x_i > 0 else -1 for x_i in x]
+
+# Runing Gradient Descent
+
+dt = 0.01
+U = np.eye(2)
+O = np.array([[1, 0],[0, -1]])
+costf = []
+n_iter = 1000
+for i in range(n_iter):
+    U = expm(dt * grad(O, U, x, y)) @ U
+    costf.append(cost(O, U, x, y))
+
+# Plot Results
+plt.plot(range(n_iter), costf)
+plt.title('Gradient Descent for Mean Square Error')
+plt.xlabel('Interation')
+plt.ylabel('Cost ${\cal L}(U)$')
+```
+
+For a linear system with size 8 the graph was:
+
+![Mean Square Error](https://github.com/JoaoMiguelNC/JoaoMiguelNC.github.io/blob/master/Images/Mean%20Square%20Error.png)
 
 ### Cross Entropy
 For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
