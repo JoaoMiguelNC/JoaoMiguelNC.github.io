@@ -51,7 +51,7 @@ Which means that to update the circuit for $$U$$, we just need to append the exp
 
 # Computing the Gradient
 
-For the mentorship program, we redirived the gradient in [1] and derived other gradiants based on different cost functions.
+For the mentorship program, we redirived the gradient in [1] and derived other gradiants based on different cost functions, and tested the results using Python.
 
 ### Variational Quantum Eigensolver
 
@@ -75,21 +75,59 @@ $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dag
 
 #### Code
 ```python
-import random
+import numpy as np
+import matplotlib.pyplot as plt
 
-def code():
-  test
+from scipy.stats import unitary_group
+from scipy.linalg import expm
+
+# Useful Functions
+
+def dag(X):
+  return X.conj().T
+
+# Cost and Gradient Functions
+
+n = 6
+N = 2 ** n
+V = unitary_group.rvs(N)
+
+def cost(A, B, d):
+    return 1.0 - (np.abs(np.trace(dag(A) @ B)) / d) ** 2
+
+
+def grad(A, B, d):
+    return (np.trace(A @ dag(B)) * (B @ dag(A)) - np.trace(B @ dag(A)) * (A @ dag(B))) / d ** 2
+
+# Runing Gradient Descent
+
+dt = 1.0
+U = np.eye(N)
+costf = []
+n_iter = 1000
+for i in range(n_iter):
+    U = expm(dt * grad(U, V, N)) @ U
+    costf.append(cost(U, V, N))
+
+# Plot Results
+plt.plot(range(n_iter), costf)
+plt.title('Gradient Descent for Quantum Compiling')
+plt.xlabel('Interation')
+plt.ylabel('Cost ${\cal L}(U)$')
 ```
+
+For a 6-qubit we got the following graph
+![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Quantum%20Compiling.png)
 
 ### Solving Linear Equations
 
-To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
+To find the solution of a linear equation $$Ax=b$$ we can optimize a unitary $$U$$ such that 
 $$U|0\rangle$$
 approximates $$|x\rangle$$ using one cost function introduced in [3]
 
 $${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
 
-For this function the gradient is
+For this function, the gradient is
 
 $$\mathrm{grad}{\cal L}(U) = \left[ U|0\rangle\langle 0|U^\dagger, \frac{fA^\dagger A - gA^\dagger|b\rangle\langle b|A}{g^2} \right]U$$
 
