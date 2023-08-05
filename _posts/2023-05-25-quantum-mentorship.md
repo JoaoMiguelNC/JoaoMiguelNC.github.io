@@ -303,7 +303,7 @@ plt.xlabel('Interation')
 plt.ylabel('Cost ${\cal L}(U)$')
 ```
 
-For a linear system with size 8 the graph was:
+Taking points arround 2 and -2 we got the following graph:
 
 ![Mean Square Error](https://github.com/JoaoMiguelNC/JoaoMiguelNC.github.io/blob/master/Images/Mean%20Square%20Error.png)
 
