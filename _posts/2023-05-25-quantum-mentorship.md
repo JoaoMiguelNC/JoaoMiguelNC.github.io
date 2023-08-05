@@ -73,7 +73,8 @@ And we got
 
 $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
 
-#### Code
+#### Code and Graph
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -88,16 +89,18 @@ def dag(X):
 
 # Cost and Gradient Functions
 
-n = 6
-N = 2 ** n
-V = unitary_group.rvs(N)
-
 def cost(A, B, d):
     return 1.0 - (np.abs(np.trace(dag(A) @ B)) / d) ** 2
 
 
 def grad(A, B, d):
     return (np.trace(A @ dag(B)) * (B @ dag(A)) - np.trace(B @ dag(A)) * (A @ dag(B))) / d ** 2
+
+# Initialization
+
+n = 6
+N = 2 ** n
+V = unitary_group.rvs(N)
 
 # Runing Gradient Descent
 
@@ -116,7 +119,8 @@ plt.xlabel('Interation')
 plt.ylabel('Cost ${\cal L}(U)$')
 ```
 
-For a 6-qubit we got the following graph
+For a 6-qubit we got the following graph:
+
 ![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Quantum%20Compiling.png)
 
 ### Solving Linear Equations
@@ -135,6 +139,89 @@ where
 $$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ 
 and 
 $$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
+
+#### Code and Graph
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+from scipy.stats import unitary_group
+from scipy.linalg import expm
+
+# Useful Functions
+
+def commutator(A, B):
+  return A @ B - B @ A
+
+
+def dag(X):
+  return X.conj().T
+  
+
+def ketbra(b):
+  x = b.reshape(-1, 1)
+  return x @ dag(x)
+
+# Cost and Gradient Functions
+
+def cost(A, U, b):
+  o = np.zeros(N)
+  o[0] = 1.0
+  psi = A @ U @ o
+  return 1 - (np.abs(dag(b) @ psi) ** 2) / np.abs((dag(psi) @ psi))
+
+
+def grad(A, U, b):
+  ro = np.zeros((N, N))
+  ro[0, 0] = 1.0
+
+  f = np.trace(U @ ro @ dag(U) @ dag(A) @ ketbra(b) @ A)
+  g = np.trace(U @ ro @ dag(U) @ dag(A) @ A)
+
+  return commutator(
+      U @ ro @ dag(U),
+      (f * dag(A) @ A - g * dag(A) @ ketbra(b) @ A) / g**2,
+  )
+
+# Initialization
+
+n = 3
+N = 2 ** n
+
+V = unitary_group.rvs(N)
+
+o = np.zeros(N)
+o[0] = 1.0
+ro = np.zeros((N, N))
+ro[0, 0] = 1.0
+
+b = V @ o
+
+A = np.array([[1, 0, 1, 0, 0, 0, 0, 0],[0, 1, 0, 0, 0, 0, 0, 0],[0, 0, 1, 1, 0, 0, 0, 0],[0, 1, 0, 1, 0, 0, 0, 0],
+              [0, 0, 0, 0, 1, 0, 1, 0],[0, 0, 0, 0, 0, 1, 0, 0],[0, 0, 0, 0, 0, 0, 1, 1],[0, 0, 0, 0, 0, 1, 0, 1]])
+
+# Runing Gradient Descent
+
+dt = 0.1
+U = np.eye(N)
+costf = []
+n_iter = 1000
+for i in range(n_iter):
+    U = expm(dt * grad(A, U, b)) @ U
+    costf.append(cost(A, U, b))
+
+# Plot Results
+plt.plot(range(n_iter), costf)
+plt.title('Gradient Descent for Solving Linear Equations')
+plt.xlabel('Interation')
+plt.ylabel('Cost ${\cal L}(U)$')
+
+```
+
+For a linear system with size 8 the graph was:
+
+![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Solving%20Linear%20Equations.png)
+
 
 ### Mean Square Error
 For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
