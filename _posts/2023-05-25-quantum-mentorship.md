@@ -305,7 +305,7 @@ plt.ylabel('Cost ${\cal L}(U)$')
 
 Taking points arround 2 and -2 we got the following graph:
 
-![Mean Square Error](https://github.com/JoaoMiguelNC/JoaoMiguelNC.github.io/blob/master/Images/Mean%20Square%20Error.png)
+![Mean Square Error](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Mean%20Square%20Error.png)
 
 ### Cross Entropy
 For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
