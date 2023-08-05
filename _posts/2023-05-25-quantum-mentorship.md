@@ -73,6 +73,14 @@ And we got
 
 $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
 
+#### Code
+```python
+import random
+
+def code():
+  test
+```
+
 ### Solving Linear Equations
 
 To find the solution of a linear equation $$Ax=b$$ we can obtimze a unitary $$U$$ such that 
