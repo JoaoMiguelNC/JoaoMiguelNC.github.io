@@ -73,7 +73,51 @@ And we got
 
 $$\mathrm{grad}{\cal L}(U) = - \frac{1}{4^n}\left(\mathrm{tr}(VU^\dagger)UV^\dagger - \mathrm{tr}(V^\dagger U)VU^\dagger\right)U$$
 
-#### Code and Graph
+### Solving Linear Equations
+
+To find the solution of a linear equation $$Ax=b$$ we can optimize a unitary $$U$$ such that 
+$$U|0\rangle$$
+approximates $$|x\rangle$$ using one cost function introduced in [3]
+
+$${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
+
+For this function, the gradient is
+
+$$\mathrm{grad}{\cal L}(U) = \left[ U|0\rangle\langle 0|U^\dagger, \frac{fA^\dagger A - gA^\dagger|b\rangle\langle b|A}{g^2} \right]U$$
+
+where 
+$$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ 
+and 
+$$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
+
+### Mean Square Error
+For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
+
+$${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i \right)^2$$
+
+And the gradient is
+
+$$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
+
+### Cross Entropy
+For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
+
+$${\cal L}(U) = -\frac{1}{m}\sum_{i = 1}^m\left(y_i\log f(U; x_i) + (1 - y_i)\log(1 - f(U; x_i))\right)$$
+
+where $$f(U; x_i) := (\mathrm{tr}(OU\rho_0(x_i)U^\dagger) + 1)/2$$
+
+The gradient for this loss function is
+
+$$\mathrm{grad}{\cal L}(U) = \frac{1}{m}\left(\sum_i \frac{T_i + 1 - 2y_i}{T_i^2 - 1}[U\rho_0(x_i)U^\dagger, O] \right)U$$
+
+where $$T_i:=\mathrm{tr}(OU\rho_0(x_i)U^\dagger)$$
+
+# Code and Graphs
+For the quantum compiling, solving linear equations, and mean square error cases we wrote code to test the gradient functions we derived.
+
+### Code for "Quantum Compiling"
+
+For quantum compiling we tested it for a 6-qubit.
 
 ```python
 import numpy as np
@@ -118,29 +162,9 @@ plt.title('Gradient Descent for Quantum Compiling')
 plt.xlabel('Interation')
 plt.ylabel('Cost ${\cal L}(U)$')
 ```
+#### Code for "Solving linear Equations"
 
-For a 6-qubit we got the following graph:
-
-![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Quantum%20Compiling.png)
-
-### Solving Linear Equations
-
-To find the solution of a linear equation $$Ax=b$$ we can optimize a unitary $$U$$ such that 
-$$U|0\rangle$$
-approximates $$|x\rangle$$ using one cost function introduced in [3]
-
-$${\cal L}(U) = 1 - \frac{|\langle b|AU|0\rangle|^2}{\lVert AU|0\rangle \rVert^2}$$
-
-For this function, the gradient is
-
-$$\mathrm{grad}{\cal L}(U) = \left[ U|0\rangle\langle 0|U^\dagger, \frac{fA^\dagger A - gA^\dagger|b\rangle\langle b|A}{g^2} \right]U$$
-
-where 
-$$f := \mathrm{tr}(U|0\rangle\langle 0|U^\dagger A^\dagger|b\rangle\langle b|A)$$ 
-and 
-$$g := U|0\rangle\langle 0|U^\dagger A^\dagger A$$.
-
-#### Code and Graph
+here we tested with a linear system with size 8.
 
 ```python
 import numpy as np
@@ -219,22 +243,10 @@ plt.ylabel('Cost ${\cal L}(U)$')
 
 ```
 
-For a linear system with size 8 the graph was:
+#### Code for "Mean Square Error"
 
-![Solving Linear Equations](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Solving%20Linear%20Equations.png)
+For the mean square error we randomly choose points around 2 and -2 with a gaussian.
 
-
-### Mean Square Error
-For the mean square error, with $$y_i\in\{-1, 1\}$$, the loss function is
-
-$${\cal L}(U) = \frac{1}{2m}\sum_{i=1}^m \left( \mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i \right)^2$$
-
-And the gradient is
-
-$$\mathrm{grad}{\cal L}(U) = -\frac{1}{2m}\left( 2(\mathrm{tr}(OU\rho_0(x_i)U^\dagger) - y_i)[U\rho_0(x_i)U^\dagger, O] \right)U$$
-
-
-#### Code and Graph
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -303,22 +315,15 @@ plt.xlabel('Interation')
 plt.ylabel('Cost ${\cal L}(U)$')
 ```
 
-Taking points arround 2 and -2 we got the following graph:
+### Results
+
+The codes above produced the following graphs, in all cases the cost function decreases.
+
+![Quantum Compiling](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Quantum%20Compiling.png)
+
+![Solving Linear Equations](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Solving%20Linear%20Equations.png)
 
 ![Mean Square Error](https://raw.githubusercontent.com/JoaoMiguelNC/JoaoMiguelNC.github.io/master/Images/Mean%20Square%20Error.png)
-
-### Cross Entropy
-For the cross entropy, with $$y_i\in\{0, 1\}$$, the loss function is
-
-$${\cal L}(U) = -\frac{1}{m}\sum_{i = 1}^m\left(y_i\log f(U; x_i) + (1 - y_i)\log(1 - f(U; x_i))\right)$$
-
-where $$f(U; x_i) := (\mathrm{tr}(OU\rho_0(x_i)U^\dagger) + 1)/2$$
-
-The gradient for this loss function is
-
-$$\mathrm{grad}{\cal L}(U) = \frac{1}{m}\left(\sum_i \frac{T_i + 1 - 2y_i}{T_i^2 - 1}[U\rho_0(x_i)U^\dagger, O] \right)U$$
-
-where $$T_i:=\mathrm{tr}(OU\rho_0(x_i)U^\dagger)$$
 
 # References
 
